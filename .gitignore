@@ -1,0 +1,36 @@
+# === Eclipse & IDE files ===
+.classpath
+.project
+.settings/
+bin/
+target/
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Logs & temp ===
+*.log
+*.tmp
+
+# === Build files ===
+*.class
+*.jar
+*.war
+
+# === Personal files ===
+*.iml
+*.swp
+
+# === VSCode ===
+.vscode/
+
+# === IntelliJ IDEA ===
+.idea/
+out/
+
+src/main/resources/
+target/
+src/main/java/loaders
+src/main/java/mains
+src/test
