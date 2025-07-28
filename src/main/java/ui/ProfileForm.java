@@ -73,7 +73,7 @@ public class ProfileForm {
 
                     JOptionPane.showMessageDialog(profileForm, "Profile saved!");
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(profileForm, "Error: Field(s) are empty", "Input Error",
+                    JOptionPane.showMessageDialog(profileForm, "Error: Field(s) are empty or incorrect", "Input Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }

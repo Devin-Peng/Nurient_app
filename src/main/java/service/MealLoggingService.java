@@ -9,4 +9,8 @@ public class MealLoggingService {
 	public void logMeal(Meal meal) {
 		mealDAO.logMeal(meal);
 	}
+
+	public void logMeal_v2(Meal meal) {
+		mealDAO.logMeal(meal);
+	}
 }

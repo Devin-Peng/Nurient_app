@@ -1,6 +1,8 @@
 package ui;
 
 import classes.Session;
+import observer.SwapChartObserver;
+import observer.SwapLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -148,7 +150,11 @@ public class MainGUIScreen {
 
         swapButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //empty for now
+                SwapForm swap = new SwapForm();
+                mainScreenFrame.setVisible(false);
+                swap.addSwapEventListener(new SwapLogger());
+                swap.addSwapEventListener(new SwapChartObserver());
+                swap.setVisible(true);
             }
         });
 

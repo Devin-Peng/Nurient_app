@@ -6,17 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import classes.Session;
 import classes.Meal;
 import service.MealLoggingService;
 
 public class MealLoggingForm {
 
     private JFrame mealLoggingForm;
-    private int userId;
     private Meal meal;
 
     public MealLoggingForm(int userId) {
-		this.userId = userId;
         mealLoggingForm = new JFrame();
         initialize();
     }
@@ -58,12 +57,13 @@ public class MealLoggingForm {
                 try {
                     if (meal == null) {
                         meal = new Meal(
-                            userId,
-                            (String) mealTypeBox.getSelectedItem(),
-                            LocalDate.parse(dateField.getText())
+                            Session.currentUser.getId(),
+                            mealTypeBox.getSelectedItem().toString(),
+                            LocalDate.parse(dateField.getText()),
+                            ingredientField.getText(),
+                            quantityField.getText()
                         );
                     }
-                    meal.addItems(ingredientField.getText(), Integer.parseInt(quantityField.getText()));
 
                     // Clear ingredient fields for next ingredient
                     ingredientField.setText("");
@@ -115,3 +115,4 @@ public class MealLoggingForm {
         mealLoggingForm.setVisible(b);
     }
 }
+

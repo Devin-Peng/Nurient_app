@@ -1,61 +1,17 @@
 package dao;
 
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import classes.Meal;
 import dbmanager.DatabaseManager;
 
-// may be changed to utility class later, access database table meals
-// !!!!!!!!!!!!!can try to refactor this to use TEMPLETE METHOD later
 public class MealDAO {
-	
-	// load Meal data into database table meals
-	// public void logMeal(Meal meal) {
-	// 	String sqlToInsert = "INSERT INTO meals (user_id, meal_type, date, ingredient, quantity) VALUES (?, ?, ?, ?, ?)";
-	// 	try (Connection conn = DatabaseManager.getInstance().getConnection();
-	// 		 PreparedStatement stmt = conn.prepareStatement(sqlToInsert)) {
-			
-	// 		stmt.setInt(1, meal.getUserId());
-	// 		stmt.setString(2, meal.getMealType());
-	// 		stmt.setDate(3, Date.valueOf(meal.getDate()));
-	// 		for (Map.Entry<String, Integer> entry : meal.getItems().entrySet()) {
-	// 			String ingredient = entry.getKey();
-	// 			Integer quantity = entry.getValue();
-	// 			stmt.setString(4, ingredient);
-	// 			stmt.setInt(5, quantity);
-	// 			stmt.executeUpdate();
-	// 		}
-			
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// }
-	
-	public Meal fetchMeal(int id, LocalDate date, String mealType) {
-		String sqlToSelectItems = "SELECT ingredient, quantity FROM meals WHERE user_id = ? AND meal_type = ? AND date = ?";
-		Meal meal = new Meal(id, mealType, date);
-		try (Connection conn = DatabaseManager.getInstance().getConnection();
-			PreparedStatement stmt = conn.prepareStatement(sqlToSelectItems)) {
-				
-			stmt.setInt(1, id);
-			stmt.setString(2, mealType);
-			stmt.setDate(3, Date.valueOf(date));
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				meal.addItems(rs.getString(1), rs.getInt(2));
-			}
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-		return meal;
-	}
 
-	    public List<Integer> getAllUserIds() {
+    public List<Integer> getAllUserIds() {
         List<Integer> userIds = new ArrayList<>();
         String sql = "SELECT DISTINCT user_id FROM meal_table";
         try (
@@ -197,40 +153,5 @@ public class MealDAO {
         return -1;
     }
 
-    // public List<Meal> getRecentMeals(int userId, int limit) {
-    //     List<Meal> meals = new ArrayList<>();
-        
-    //     // SQL query to get recent meals 
-    //     String query = "SELECT id, meal_name, category, calories, date_logged " +
-    //                 "FROM meals " +
-    //                 "WHERE user_id = ? " +
-    //                 "ORDER BY date_logged DESC " +
-    //                 "LIMIT ?";
-        
-    //     try (Connection conn = DatabaseManager.getInstance().getConnection();
-    //             PreparedStatement statement = conn.prepareStatement(query); {
-    //         stmt.setInt(1, userId);
-    //         stmt.setInt(2, limit);
-            
-    //         ResultSet rs = stmt.executeQuery();
-            
-    //         while (rs.next()) {
-    //             Meal meal = new Meal(
-    //                 rs.getInt("id"),
-    //                 rs.getString("meal_name"),
-    //                 rs.getString("category"),
-    //                 rs.getInt("calories"),
-    //                 rs.getTimestamp("date_logged")
-    //             );
-    //             meals.add(meal);
-    //         }
-            
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         throw new RuntimeException("Error retrieving recent meals", e);
-    //     }
-        
-    //     return meals;
-    // }
 
-}
+} 
